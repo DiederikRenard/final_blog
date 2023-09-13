@@ -35,7 +35,7 @@ db.init_app(app)
 
 
 # CONFIGURE TABLES
-class User(UserMixin, db.Model):
+class User(db.Model):
     __tablename__ = "users"
     id: Mapped[int] = mapped_column(primary_key=True)
     username = db.Column(db.String(250), unique=True, nullable=False)
@@ -116,7 +116,6 @@ def register():
         login_user(new_user)
         return redirect(url_for('get_all_posts'))
     return render_template("register.html", form=form)
-
 
 
 @app.route('/login', methods=["GET", "POST"])
